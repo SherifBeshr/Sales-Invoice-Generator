@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -111,9 +114,6 @@ public class ActionHandler implements ActionListener, ListSelectionListener{
                 Path headerPath = Paths.get(headerFile.getAbsolutePath());
                 List<String> headerLines = Files.readAllLines(headerPath);
                 System.out.println("Invoices have been read");
-                // 1,22-11-2020,Ali
-                // 2,13-10-2021,Saleh
-                // 3,09-01-2019,Ibrahim
                 ArrayList<InvoiceHeader> invoicesArray = new ArrayList<>();
                 for (String headerLine : headerLines) {
                     String[] headerParts = headerLine.split(",");
@@ -157,7 +157,6 @@ public class ActionHandler implements ActionListener, ListSelectionListener{
                 frame.getInvoicesTableModel().fireTableDataChanged();
             }
         } catch (IOException ex) {
-//            ex.printStackTrace();
         }  
     }
 
@@ -213,14 +212,18 @@ public class ActionHandler implements ActionListener, ListSelectionListener{
             String date = invoiceDialog.getInvoiceDateField().getText();
             int num = frame.getNextInvNum();
             
+            // Check for date Format
+            if(isValidDate( date) == null){
+                  JOptionPane.showMessageDialog(invoiceDialog, "Wrong Date Format!" ,"Date Format Error",JOptionPane.ERROR_MESSAGE );
+            }
+            else{          
             InvoiceHeader invoiceHeader = new InvoiceHeader(num, customerName, date);
-
-//            System.out.println("Num: " + num + " " + invoiceHeader.getCustomer() + " " + invoiceHeader.getDate());
             frame.getInvoices().add(invoiceHeader);
             frame.getInvoicesTableModel().fireTableDataChanged();
             
             invoiceDialog.dispose();
             invoiceDialog = null;
+            }
         }
     }
 
@@ -250,7 +253,6 @@ public class ActionHandler implements ActionListener, ListSelectionListener{
             InvoiceLine line = new InvoiceLine(invoice, item, price, count);
             invoice.getLines().add(line);
             LinesTableModel linesTableModel = (LinesTableModel) frame.getLineTable().getModel();
-//            linesTableModel.getLines().add(line);
             linesTableModel.fireTableDataChanged();
             frame.getInvoicesTableModel().fireTableDataChanged();
         }
@@ -266,4 +268,18 @@ public class ActionHandler implements ActionListener, ListSelectionListener{
         lineDialog.dispose();
         lineDialog = null;
     }
+    
+    
+    public Date isValidDate(String dateToValidate) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        dateFormat.setLenient(false);
+        Date parsedDate = null;
+        try {
+            parsedDate = dateFormat.parse(dateToValidate);
+    } catch (ParseException e) {
+    }
+    return parsedDate;
+}
+    
 }
