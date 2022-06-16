@@ -214,7 +214,7 @@ public class ActionHandler implements ActionListener, ListSelectionListener{
             
             // Check for date Format
             if(isValidDate( date) == null){
-                  JOptionPane.showMessageDialog(invoiceDialog, "Wrong Date Format!" ,"Date Format Error",JOptionPane.ERROR_MESSAGE );
+                  JOptionPane.showMessageDialog(invoiceDialog, "Wrong Date Format! \n\"dd-mm-yyyy\"" ,"Date Format Error",JOptionPane.ERROR_MESSAGE );
             }
             else{          
             InvoiceHeader invoiceHeader = new InvoiceHeader(num, customerName, date);
