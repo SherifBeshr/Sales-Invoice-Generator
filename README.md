@@ -9,6 +9,11 @@
 If you tried to create new invoice with an empty text field an error will appear
 ![image](https://user-images.githubusercontent.com/63435727/174085315-54721aa7-e187-4efc-aa95-6bcdbc38506f.png)
 
+If you tried to enter wrong date format
+
+![image](https://user-images.githubusercontent.com/63435727/174103076-02987858-54f0-418d-9414-cc71c7311622.png)
+
+
 Creating New Item
 
 ![image](https://user-images.githubusercontent.com/63435727/174085846-830cc3b6-1269-46c0-97a4-e35808539c4c.png)
