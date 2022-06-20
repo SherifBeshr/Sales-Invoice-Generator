@@ -18,6 +18,9 @@ Creating New Item
 
 ![image](https://user-images.githubusercontent.com/63435727/174085846-830cc3b6-1269-46c0-97a4-e35808539c4c.png)
 
+Printing Data After Loading Files
+![image](https://user-images.githubusercontent.com/63435727/174506235-a2b34530-8dca-4b86-8525-619a163d08b9.png)
+
 After Saving files
 
 ![image](https://user-images.githubusercontent.com/63435727/174086308-3e5ae764-b39c-4818-affe-c35dc7d6a62c.png)
