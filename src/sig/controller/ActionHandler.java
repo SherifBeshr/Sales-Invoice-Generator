@@ -61,6 +61,7 @@ public class ActionHandler implements ActionListener, ListSelectionListener{
 //        System.out.println(selectedIndex);
         if (selectedIndex != -1) {
             System.out.println("You have selected row: " + selectedIndex);
+            System.out.println("Selected: " + frame.getInvoices().toString());                // Printing Invoices
             InvoiceHeader currentInvoice = frame.getInvoices().get(selectedIndex);
             frame.getNumLabel().setText("" + currentInvoice.getNum());
             frame.getDateLabel().setText(currentInvoice.getDate());
@@ -124,13 +125,13 @@ public class ActionHandler implements ActionListener, ListSelectionListener{
                     InvoiceHeader invoice = new InvoiceHeader(invoiceNum, customerName , invoiceDate);
                     invoicesArray.add(invoice);
                 }
-                System.out.println("Check point");
                 result = fc.showOpenDialog(frame);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File lineFile = fc.getSelectedFile();
                     Path linePath = Paths.get(lineFile.getAbsolutePath());
                     List<String> lineLines = Files.readAllLines(linePath);
                     System.out.println("Lines have been read");
+                    System.out.println("Load Header: " + headerLines);                  // Printing Loaded Data
                     for (String lineLine : lineLines) {
                         String lineParts[] = lineLine.split(",");
                         int invoiceNum = Integer.parseInt(lineParts[0]);
@@ -148,7 +149,6 @@ public class ActionHandler implements ActionListener, ListSelectionListener{
                         InvoiceLine line = new InvoiceLine(inv, itemName, itemPrice, count);
                         inv.getLines().add(line);
                     }
-                    System.out.println("Check point");
                 }
                 frame.setInvoices(invoicesArray);
                 InvoiceTableModel invoicesTableModel = new InvoiceTableModel(invoicesArray);
@@ -176,7 +176,6 @@ public class ActionHandler implements ActionListener, ListSelectionListener{
                 lines += "\n";
             }
         }
-        System.out.println("Check point");
         try {
             JFileChooser fc = new JFileChooser();
             int result = fc.showSaveDialog(frame);
